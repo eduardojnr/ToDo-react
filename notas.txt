@@ -1,0 +1,23 @@
+https://www.youtube.com/watch?v=2RWsLmu8yVc&ab_channel=FelipeRocha%E2%80%A2FullStackClub
+
+Iniciar projeto
+`npm create vite@5.5.2 .`
+        framework: react
+        variant: javascript
+`npm install`
+
+
+Executar
+`npm run dev`
+
+
+Criei ./src/components
+
+
+`npm install -D tailwindcss postcss autoprefixer`
+`npx tailwindcss init`
+
+
+Icones
+lucide.dev
+`npm install lucide-react`
