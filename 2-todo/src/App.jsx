@@ -63,7 +63,7 @@ function App( onTaskClick, onDeleteTaskClick, onAddTaskSubmit ) {
   // Adiciona uma nova tarefa
   function onAddTaskSubmit(title, description) {
     const NewTasks = {
-      id: tasks.length + 1,
+      id: tasks.length + 2,
       title: title,
       description: description,
       isCompleted: false,
