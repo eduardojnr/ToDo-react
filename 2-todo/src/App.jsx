@@ -1,28 +1,45 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 
 function App( onTaskClick, onDeleteTaskClick, onAddTaskSubmit ) {
-  // Passa os atributos paea o props, e o props para o componente Tasks
-  const [tasks, setTasks] = useState([
-    { 
-      id: 1, 
-      title: "Estudar React",
-      description: "Estudar React para fazer projetos",
-      isCompleted: false,
-    },{
-      id: 2,
-      title: 'Estudar Tailwind CSS',
-      description: 'Aprender Tailwind CSS para estilizar projetos',
-      isCompleted: false,
-    },{
-      id: 3,
-      title: 'Estudar TypeScript',
-      description: 'Aprender TypeScript para entender de Back-end',
-      isCompleted: false,
-    }
-  ])
-  
+  // Passa os atributos para o props, e o props para o componente Tasks
+  // const [tasks, setTasks] = useState([
+  //   { 
+  //     id: 1, 
+  //     title: "Estudar React",
+  //     description: "Estudar React para fazer projetos",
+  //     isCompleted: false,
+  //   },{
+  //     id: 2,
+  //     title: 'Estudar Tailwind CSS',
+  //     description: 'Aprender Tailwind CSS para estilizar projetos',
+  //     isCompleted: false,
+  //   }
+  // ])
+
+
+  // Consumindo dados de uma API - Exemplo
+
+  // Quando o segundo elemento é uma lista vazia, significa que a função será executada uma única vez, que será quando o usuário acaba de acessar a aplicação
+  // useEffect(() => {
+  //   async function fetchTasks() {
+  //     const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=5', {method: 'GET'})
+  //     const data = await response.json()
+  //     setTasks(data)
+  //   }
+  //   fetchTasks()
+  // }, [])
+
+
+  // LocalStorage para armazenar
+  const [tasks, setTasks] = useState(JSON.parse(localStorage.getItem("tasks")) || [])
+
+
+  // A função useEffect é executada toda vez que o estado de tasks é alterado
+  useEffect(() => {localStorage.setItem("tasks", JSON.stringify(tasks))}, [tasks])
+
+
   // Função para atualizar o estado de uma tarefa
   function onTaskClick(taskId) {
     const NewTasks = tasks.map(task => {
@@ -57,7 +74,7 @@ function App( onTaskClick, onDeleteTaskClick, onAddTaskSubmit ) {
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
       <div className="w-[500px] space-y-4">
-        <h1 className="title-3xl title-slate-100 font-bold title-center">Gerenciador de Tarefas</h1>
+        <h1 className="title-3xl title-slate-100 font-bold text-center text-white">Gerenciador de Tarefas</h1>
         <AddTask onAddTaskSubmit={onAddTaskSubmit}/>
         <Tasks tasks={tasks} onTaskClick={onTaskClick} onDeleteTaskClick={onDeleteTaskClick}/>
       </div>
